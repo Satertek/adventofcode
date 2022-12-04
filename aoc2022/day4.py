@@ -1,15 +1,14 @@
 import numpy as np
 
 def get_day4(infile="./aoc2022/day4_input.txt", part2=False):
-    data = np.loadtxt(infile, delimiter=",", dtype=str)
+    with open(infile) as f:
+        data=np.loadtxt((x.replace('-',',') for x in f), delimiter=",", dtype=int)
     overlap_count = 0
     complete_count = 0
     for pair in data:
 
-        elf_one = pair[0].split('-')
-        elf_one = set(range(int(elf_one[0]), int(elf_one[1])+1))
-        elf_two = pair[1].split('-')
-        elf_two = set(range(int(elf_two[0]), int(elf_two[1])+1))
+        elf_one = set(range(pair[0], pair[1]+1))
+        elf_two = set(range(pair[2], pair[3]+1))
 
         overlaps = list(elf_one & elf_two)
 
