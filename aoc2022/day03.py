@@ -9,7 +9,7 @@ def calc_score(letter):
     return score
 
 
-def get_day3(infile="./aoc2022/day3_input.txt", part2=False):
+def get_day03(infile="./aoc2022/day03_input.txt", part2=False):
     data = np.loadtxt(infile, dtype=str)
 
     score = 0
@@ -40,9 +40,9 @@ if __name__ == "__main__":
     print("Day 3")
     print(
         "Find the item type that appears in both compartments of each rucksack. "
-        + f"What is the sum of the priorities of those item types? {get_day3()}"
+        + f"What is the sum of the priorities of those item types? {get_day03()}"
     )
     print(
         "Find the item type that corresponds to the badges of each three-Elf group. "
-        + f"What is the sum of the priorities of those item types? {get_day3(part2=True)}"
+        + f"What is the sum of the priorities of those item types? {get_day03(part2=True)}"
     )

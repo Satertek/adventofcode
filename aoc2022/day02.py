@@ -65,7 +65,7 @@ def rps_modifier(them, result):
     return them, us
 
 
-def get_day2(infile="./aoc2022/day2_input.txt", part2=False):
+def get_day02(infile="./aoc2022/day02_input.txt", part2=False):
     data = np.loadtxt(infile, delimiter=" ", dtype=str)
 
     df = pd.DataFrame(data)
@@ -83,10 +83,10 @@ if __name__ == "__main__":
     print("Day 2")
     print(
         f"What would your total score be if everything goes "
-        + f"exactly according to your strategy guide?\n[ {get_day2()} ]"
+        + f"exactly according to your strategy guide?\n[ {get_day02()} ]"
     )
     print(
         f"Following the Elf's instructions for the second column, "
         + "what would your total score be if everything goes exactly "
-        + f"according to your strategy guide?\n[ {get_day2(part2=True)} ]"
+        + f"according to your strategy guide?\n[ {get_day02(part2=True)} ]"
     )

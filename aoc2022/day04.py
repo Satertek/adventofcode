@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def get_day4(infile="./aoc2022/day4_input.txt", part2=False):
+def get_day04(infile="./aoc2022/day04_input.txt", part2=False):
     with open(infile) as f:
         data = np.loadtxt((x.replace("-", ",") for x in f), delimiter=",", dtype=int)
     overlap_count = 0
@@ -23,8 +23,8 @@ def get_day4(infile="./aoc2022/day4_input.txt", part2=False):
 
 
 def test_day04():
-    assert get_day4("./aoc2022/day4_test.txt") == 2
-    assert get_day4("./aoc2022/day4_test.txt", part2=True) == 4
+    assert get_day04("./aoc2022/day04_test.txt") == 2
+    assert get_day04("./aoc2022/day04_test.txt", part2=True) == 4
 
 
 if __name__ == "__main__":
@@ -32,9 +32,9 @@ if __name__ == "__main__":
     test_day04()
     print(
         "In how many assignment pairs does one range fully contain the other?"
-        + f"\n[ {get_day4()} ]"
+        + f"\n[ {get_day04()} ]"
     )
     print(
         "In how many assignment pairs do the ranges overlap?"
-        + f"\n[ {get_day4(part2=True)} ]"
+        + f"\n[ {get_day04(part2=True)} ]"
     )

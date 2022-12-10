@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def get_day1(infile="./aoc2022/day1_input.txt", part2=False):
+def get_day01(infile="./aoc2022/day01_input.txt", part2=False):
 
     # Create first array dimenions after blanks (each elf)
     with open(infile) as f:
@@ -26,8 +26,8 @@ def get_day1(infile="./aoc2022/day1_input.txt", part2=False):
 
 if __name__ == "__main__":
     print("Day 1")
-    print(f"How many total Calories is that Elf carrying? [ {get_day1()} ]")
+    print(f"How many total Calories is that Elf carrying? [ {get_day01()} ]")
     print(
         "Find the top three Elves carrying the most Calories. "
-        + f"How many Calories are those Elves carrying in total? [ {get_day1(part2=True)} ]"
+        + f"How many Calories are those Elves carrying in total? [ {get_day01(part2=True)} ]"
     )
