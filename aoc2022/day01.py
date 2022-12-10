@@ -1,7 +1,8 @@
 import numpy as np
 
+
 def get_day1(infile="./aoc2022/day1_input.txt", part2=False):
-    
+
     # Create first array dimenions after blanks (each elf)
     with open(infile) as f:
         data = list(f.read().split("\n\n"))

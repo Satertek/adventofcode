@@ -1,5 +1,6 @@
 import numpy as np
-from queue import LifoQueue, Empty
+from queue import LifoQueue
+
 
 def get_day05(infile="./aoc2022/day05_input.txt", part2=False):
     with open(infile) as f:
@@ -8,7 +9,6 @@ def get_day05(infile="./aoc2022/day05_input.txt", part2=False):
 
     # Create a 2D array of stacked crates
     crates = crates.split("\n")
-
     crates = np.loadtxt(
         (
             x.replace(" [", ",").replace("    ", ",").replace("]", "").replace("[", "")
@@ -60,6 +60,7 @@ def get_day05(infile="./aoc2022/day05_input.txt", part2=False):
     message = "".join(x.queue.pop() for x in stacks if len(x.queue) > 0)
 
     return message
+
 
 def test_day05():
     assert get_day05("./aoc2022/day05_test.txt") == "CMZ"

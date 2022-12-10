@@ -33,6 +33,7 @@ def rps(them, us):
 
     return score
 
+
 def rps_modifier(them, result):
     us = ""
     match result:
@@ -73,7 +74,7 @@ def get_day2(infile="./aoc2022/day2_input.txt", part2=False):
         return df.apply(lambda x: rps(x[0], x[1]), axis=1).sum()
 
     # Modify our actions based on redefined 2nd column
-    df = df.apply(lambda x: rps_modifier(x[0], x[1]), axis=1, result_type='expand')
+    df = df.apply(lambda x: rps_modifier(x[0], x[1]), axis=1, result_type="expand")
 
     return df.apply(lambda x: rps(x[0], x[1]), axis=1).sum()
 

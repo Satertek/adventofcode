@@ -1,6 +1,6 @@
 def start_index(data, markers):
     offset = 0
-    for i in range(len(data)):
+    for i in range(len(data) - markers):
         if len(set(data[i : i + markers])) == markers:
             return offset + markers
         offset += 1
