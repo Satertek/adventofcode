@@ -1,0 +1,120 @@
+== Minute 1 ==
+No valves are open.
+Total Pressure: 0
+You move to valve NT
+== Minute 2 ==
+No valves are open.
+Total Pressure: 0
+You move to valve FF
+== Minute 3 ==
+No valves are open.
+Total Pressure: 0
+You move to valve EU
+== Minute 4 ==
+No valves are open.
+Total Pressure: 0
+You move to valve OS
+== Minute 5 ==
+No valves are open.
+Total Pressure: 0
+You open valve OS (adding 15/min)
+== Minute 6 ==
+Valves OS are releasing 15 pressure.
+Total Pressure: 15
+You move to valve YA
+== Minute 7 ==
+Valves OS are releasing 15 pressure.
+Total Pressure: 30
+You move to valve QJ
+== Minute 8 ==
+Valves OS are releasing 15 pressure.
+Total Pressure: 45
+You open valve QJ (adding 17/min)
+== Minute 9 ==
+Valves OS, QJ are releasing 32 pressure.
+Total Pressure: 77
+You move to valve SV
+== Minute 10 ==
+Valves OS, QJ are releasing 32 pressure.
+Total Pressure: 109
+You move to valve HE
+== Minute 11 ==
+Valves OS, QJ are releasing 32 pressure.
+Total Pressure: 141
+You move to valve QE
+== Minute 12 ==
+Valves OS, QJ are releasing 32 pressure.
+Total Pressure: 173
+You open valve QE (adding 24/min)
+== Minute 13 ==
+Valves OS, QJ, QE are releasing 56 pressure.
+Total Pressure: 229
+You move to valve LG
+== Minute 14 ==
+Valves OS, QJ, QE are releasing 56 pressure.
+Total Pressure: 285
+You move to valve IV
+== Minute 15 ==
+Valves OS, QJ, QE are releasing 56 pressure.
+Total Pressure: 341
+You move to valve OQ
+== Minute 16 ==
+Valves OS, QJ, QE are releasing 56 pressure.
+Total Pressure: 397
+You open valve OQ (adding 23/min)
+== Minute 17 ==
+Valves OS, QJ, QE, OQ are releasing 79 pressure.
+Total Pressure: 476
+You move to valve KI
+== Minute 18 ==
+Valves OS, QJ, QE, OQ are releasing 79 pressure.
+Total Pressure: 555
+You move to valve AO
+== Minute 19 ==
+Valves OS, QJ, QE, OQ are releasing 79 pressure.
+Total Pressure: 634
+You move to valve GJ
+== Minute 20 ==
+Valves OS, QJ, QE, OQ are releasing 79 pressure.
+Total Pressure: 713
+You open valve GJ (adding 14/min)
+== Minute 21 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 806
+You move to valve AO
+== Minute 22 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 899
+You move to valve KI
+== Minute 23 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 992
+You move to valve OQ
+== Minute 24 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 1085
+You move to valve KI
+== Minute 25 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 1178
+You move to valve OQ
+== Minute 26 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 1271
+You move to valve KI
+== Minute 27 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 1364
+You move to valve AO
+== Minute 28 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 1457
+You move to valve GJ
+== Minute 29 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 1550
+You move to valve MM
+== Minute 30 ==
+Valves OS, QJ, QE, OQ, GJ are releasing 93 pressure.
+Total Pressure: 1643
+You move to valve TF
