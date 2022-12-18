@@ -10,6 +10,12 @@ def load_data(infile):
         return np.array(infile)
 
 
+def increment_faces(grid, x, y, z):
+    if grid[x, y, z] & 1 == 1:
+        return
+    grid[x, y, z] = (grid[x, y, z] + 1) << 1
+
+
 def get_day18(infile="./aoc2022/day18_input.txt", part2=False):
 
     data = load_data(infile)
@@ -29,30 +35,29 @@ def get_day18(infile="./aoc2022/day18_input.txt", part2=False):
         y = int(i % grid.shape[0])
         z = j
 
-        # Set bit 2 on all cells adjacent to cube
+        # Shift a bit every time we count the empty space
         if flat_grid[i, j] & 1:
-            grid[(x + 1), y, z] |= 2
-            grid[(x - 1), y, z] |= 2
-            grid[x, (y + 1), z] |= 2
-            grid[x, (y - 1), z] |= 2
-            grid[x, y, (z + 1)] |= 2
-            grid[x, y, (z - 1)] |= 2
+            increment_faces(grid, (x + 1), y, z)
+            increment_faces(grid, (x - 1), y, z)
+            increment_faces(grid, x, (y + 1), z)
+            increment_faces(grid, x, (y - 1), z)
+            increment_faces(grid, x, y, (z + 1))
+            increment_faces(grid, x, y, (z - 1))
 
-    # Count the faces that only have bit 2 set
-    visible_faces = len(np.where(grid ^ 3 == 1)[0])
+    # Replace all values in grid with number of faces visible at that location
+    grid = np.vectorize(lambda x: bin(x).count("1"))(grid >> 1)
+
+    visible_faces = grid.sum()
     return visible_faces
 
 
 def test_day18():
-    assert get_day18([[4, 5, 4], [4, 4, 4], [4, 4, 5]]) == 13
-    assert get_day18([[4, 4, 4], [1, 1, 1], [3, 3, 3]]) == 18
-    assert get_day18([[2, 2, 2]]) == 6
     assert get_day18([[1, 1, 1], [2, 1, 1]]) == 10
     assert get_day18("./aoc2022/day18_test.txt") == 64
-    # assert get_day18("./aoc2022/day18_test.txt", part2=True) == 0
+    #assert get_day18("./aoc2022/day18_test.txt", part2=True) == 58
 
 
 if __name__ == "__main__":
     test_day18()
-    print("?" + f"\n[ {get_day18()} ]")
-    print("?" + f"\n[ {get_day18(part2=True)} ]")
+    print("What is the surface area of your scanned lava droplet?" + f"\n[ {get_day18()} ]")
+    # print("?" + f"\n[ {get_day18(part2=True)} ]")
