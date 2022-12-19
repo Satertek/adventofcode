@@ -1,6 +1,7 @@
 import re
 import numpy as np
 import pandas as pd
+from scipy import ndimage
 
 
 def load_data(infile):
@@ -47,17 +48,32 @@ def get_day18(infile="./aoc2022/day18_input.txt", part2=False):
     # Replace all values in grid with number of faces visible at that location
     grid = np.vectorize(lambda x: bin(x).count("1"))(grid >> 1)
 
+    if part2:
+        # Remove bubbles
+        grid *= (
+            ~ndimage.binary_erosion(
+                (ndimage.binary_fill_holes(grid)).astype(int), iterations=2
+            )
+        ).astype(int)
+
     visible_faces = grid.sum()
+
     return visible_faces
 
 
 def test_day18():
     assert get_day18([[1, 1, 1], [2, 1, 1]]) == 10
     assert get_day18("./aoc2022/day18_test.txt") == 64
-    #assert get_day18("./aoc2022/day18_test.txt", part2=True) == 58
+    assert get_day18("./aoc2022/day18_test.txt", part2=True) == 58
 
 
 if __name__ == "__main__":
     test_day18()
-    print("What is the surface area of your scanned lava droplet?" + f"\n[ {get_day18()} ]")
-    # print("?" + f"\n[ {get_day18(part2=True)} ]")
+    print(
+        "What is the surface area of your scanned lava droplet?"
+        + f"\n[ {get_day18()} ]"
+    )
+    print(
+        "What is the surface area of your scanned lava droplet (excluding air bubbles)?"
+        + f"\n[ {get_day18(part2=True)} ]"
+    )
