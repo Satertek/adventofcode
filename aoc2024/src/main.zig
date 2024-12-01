@@ -7,6 +7,7 @@ pub fn main() !void {
 }
 
 pub fn day1() !void {
+    var timer = try std.time.Timer.start();
 
     // Parse our input data into two arrays (left and right)
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
@@ -44,26 +45,31 @@ pub fn day1() !void {
     var similarity_hashmap = std.AutoHashMap(i32, i32).init(allocator);
     defer similarity_hashmap.deinit();
 
-    const saved_left_list = left_list.items;
-
-    // Loop over sorted lists and calculate the total distance
+    // Loop over the left list, setting total distance and populating hashmap
+    var index: usize = 0;
     var total_distance: u32 = 0;
-    while (left_list.getLastOrNull() != null) {
-        const left: i32 = left_list.pop();
-        const right: i32 = right_list.pop();
+    for (left_list.items) |left| {
+        const right: i32 = right_list.items[index];
         total_distance += @abs(left - right);
 
         // Put the right value in a hashmap, and increment count of that value
         const previous_value = similarity_hashmap.get(right) orelse 0;
         try similarity_hashmap.put(right, previous_value + 1);
+
+        index += 1;
     }
 
-    // Loop over the left list again for similarity score
+    // Loop over the left list again using the hashmap for similarity score
     var similarity_score: i32 = 0;
-    for (saved_left_list) |left| {
+    for (left_list.items) |left| {
         similarity_score += left * (similarity_hashmap.get(left) orelse 0);
     }
 
+    const total_time: f64 = @floatFromInt(timer.read());
+
     print("Day 1:\nTotal distance: {}\n", .{total_distance});
     print("Total similiarity: {}\n", .{similarity_score});
+    print("Total time: {d}ms\n", .{
+        total_time / 1000,
+    });
 }
