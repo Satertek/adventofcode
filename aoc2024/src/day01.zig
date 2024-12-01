@@ -1,6 +1,6 @@
 const std = @import("std");
 const print = std.debug.print;
-const day1_input = @embedFile("inputs/day1.txt");
+const day1_input = @embedFile("inputs/day01.txt");
 
 pub fn main() !void {
     try day1();
