@@ -70,6 +70,6 @@ pub fn day1() !void {
     print("Day 1:\nTotal distance: {}\n", .{total_distance});
     print("Total similiarity: {}\n", .{similarity_score});
     print("Total time: {d}ms\n", .{
-        total_time / 1000,
+        total_time / 1e6,
     });
 }
