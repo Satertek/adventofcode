@@ -10,22 +10,26 @@ pub fn day1() !void {
     var timer = try std.time.Timer.start();
 
     // Parse our input data into two arrays (left and right)
+
+    // Set up allocator
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
-    var data = std.mem.tokenizeScalar(u8, day1_input, '\n');
+
+    // Set up left and right dynamically sized lists
     var left_list = std.ArrayList(i32).init(allocator);
-    defer left_list.deinit();
     var right_list = std.ArrayList(i32).init(allocator);
+    defer left_list.deinit();
     defer right_list.deinit();
 
     // Iterate over each line (newline delimiter)
+    var data = std.mem.tokenizeScalar(u8, day1_input, '\n');
     while (data.next()) |line| {
-        var values = std.mem.tokenizeSequence(u8, line, "   ");
         var is_first = true;
-        // Iterator over each value in the line (3 spaces delimiter)
+        // Iterate over each value in the line (3 spaces delimiter)
+        var values = std.mem.tokenizeSequence(u8, line, "   ");
         while (values.next()) |value| {
             const num = std.fmt.parseInt(i32, value, 10) catch |err| {
-                std.debug.print("I AM ERROR: {}\n", .{err});
+                std.debug.print("Error in value [{s}]: {}\n", .{ value, err });
                 continue;
             };
             if (is_first) {

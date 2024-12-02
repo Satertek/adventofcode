@@ -12,6 +12,17 @@
             },
             "problemMatcher": ["$zig"],
             "detail": "Build the day using Zig"
+        },
+        {
+            "label": "build_all",
+            "type": "shell",
+            "command": "zig build install_all",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$zig"],
+            "detail": "Build all days using Zig"
         }
     ]
 }
