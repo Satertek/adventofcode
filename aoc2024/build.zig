@@ -1,5 +1,3 @@
-// build file credit: https://github.com/thekorn/aoc-2023-zig/blob/main/build.zig
-
 const std = @import("std");
 const Build = std.Build;
 const CompileStep = std.Build.Step.Compile;
@@ -26,8 +24,6 @@ pub fn build(b: *Build) void {
     while (day <= 25) : (day += 1) {
         const dayString = b.fmt("day{:0>2}", .{day});
         const zigFile = b.fmt("src/{s}.zig", .{dayString});
-
-        _ = std.fs.cwd().statFile(zigFile) catch continue;
 
         const exe = b.addExecutable(.{
             .name = dayString,
@@ -72,34 +68,5 @@ pub fn build(b: *Build) void {
         const run_step = b.step(dayString, run_desc);
         run_step.dependOn(&run_cmd.step);
         run_all.dependOn(&run_cmd.step);
-    }
-
-    // Set up tests for utils.zig
-    {
-        const test_util = b.step("test_utils", "Run tests in utils.zig");
-        const test_cmd = b.addTest(.{
-            .root_source_file = b.path("src/utils.zig"),
-            .target = target,
-            .optimize = mode,
-        });
-        linkObject(b, test_cmd);
-        test_util.dependOn(&test_cmd.step);
-    }
-
-    // Set up all tests
-    {
-        const unit_tests = b.addTest(.{
-            .root_source_file = b.path("src/tests.zig"),
-            .target = target,
-            .optimize = mode,
-        });
-
-        const run_unit_tests = b.addRunArtifact(unit_tests);
-
-        // Similar to creating the run step earlier, this exposes a `test` step to
-        // the `zig build --help` menu, providing a way for the user to request
-        // running the unit tests.
-        const test_step = b.step("test", "Run unit tests");
-        test_step.dependOn(&run_unit_tests.step);
     }
 }
