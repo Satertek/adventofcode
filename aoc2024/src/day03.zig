@@ -2,14 +2,27 @@ const std = @import("std");
 const print = std.debug.print;
 const day_input = @embedFile("inputs/day03.txt");
 
+const do_inst_enabled = true; // set true to enable part 2
+
 pub fn main() !void {
     var program_result: i32 = 0;
-
+    var mul_enabled: bool = true;
     var it = std.mem
-        .window(u8, day_input, 4, 1);
+        .window(u8, day_input, 7, 1);
     find_inst: while (it.next()) |w| {
         //print("{s} {?}\n", .{ w, it.index });
-        if (std.mem.eql(u8, w, "mul(")) {
+        if (std.mem.eql(u8, w[0..4], "do()")) {
+            //print("Found do\n", .{});
+            mul_enabled = true;
+        }
+        if (std.mem.eql(u8, w[0..7], "don't()")) {
+            //print("Found don't\n", .{});
+            mul_enabled = false;
+        }
+        if (!mul_enabled and do_inst_enabled) {
+            continue :find_inst;
+        }
+        if (std.mem.eql(u8, w[0..4], "mul(")) {
             //print("Found mul\n", .{});
             const i = (it.index orelse 0) + 3;
             var itn = std.mem.window(u8, day_input[i..day_input.len], 1, 1);
