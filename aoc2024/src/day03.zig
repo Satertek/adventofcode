@@ -4,110 +4,93 @@ const day_input = @embedFile("inputs/day03.txt");
 
 const do_inst_enabled = true; // set true to enable part 2
 
+fn isDigit(val: u8) bool {
+    return val >= '0' and val <= '9';
+}
+
 pub fn main() !void {
     var program_result: i32 = 0;
     var mul_enabled: bool = true;
-    var it = std.mem
-        .window(u8, day_input, 7, 1);
+
+    var it = std.mem.window(u8, day_input, 7, 1);
+
     find_inst: while (it.next()) |w| {
-        //print("{s} {?}\n", .{ w, it.index });
-        if (std.mem.eql(u8, w[0..4], "do()")) {
-            //print("Found do\n", .{});
-            mul_enabled = true;
+        // If do/don't instruction are enabled, check for instruction
+        if (do_inst_enabled) {
+            if (std.mem.eql(u8, w[0..4], "do()")) {
+                mul_enabled = true;
+            } else if (std.mem.eql(u8, w[0..7], "don't()")) {
+                mul_enabled = false;
+            }
         }
-        if (std.mem.eql(u8, w[0..7], "don't()")) {
-            //print("Found don't\n", .{});
-            mul_enabled = false;
-        }
-        if (!mul_enabled and do_inst_enabled) {
+
+        // Skip mul instruction check if multiplication is disabled
+        if (!mul_enabled) {
             continue :find_inst;
         }
+
+        // Process multiplication instruction
         if (std.mem.eql(u8, w[0..4], "mul(")) {
-            //print("Found mul\n", .{});
             const i = (it.index orelse 0) + 3;
             var itn = std.mem.window(u8, day_input[i..day_input.len], 1, 1);
 
             var mult_one: i32 = 0;
             var mult_two: i32 = 0;
-
             var val_slice: []const u8 = itn.next() orelse continue :find_inst;
             var val = val_slice[0];
-            //print("First value: {d}\n", .{val});
-            if (val > 47 and val < 58) { // if we have a digit
-                mult_one = val - 48;
-                //print("Found digit: {d}\n", .{mult_one});
-            } else {
-                continue :find_inst;
-            }
 
-            // this should be a digit or a comma
+            // First digit
+            if (!isDigit(val)) continue :find_inst;
+            mult_one = val - '0';
+
+            // Optional second digit
             val_slice = itn.next() orelse continue :find_inst;
             val = val_slice[0];
-            //print("Second value: {d}\n", .{val});
-            if (val > 47 and val < 58) {
-                mult_one = mult_one * 10 + val - 48;
-                //print("Modified digit: {d}\n", .{mult_one});
-            } else if (val != ',') {
-                continue :find_inst;
-            }
-
-            if (val != ',') {
+            if (isDigit(val)) {
+                mult_one = mult_one * 10 + (val - '0');
                 val_slice = itn.next() orelse continue :find_inst;
                 val = val_slice[0];
-                //print("Second value: {d}\n", .{val});
-                if (val > 47 and val < 58) {
-                    mult_one = mult_one * 10 + val - 48;
-                    //print("Modified digit: {d}\n", .{mult_one});
-                } else if (val != ',') {
-                    continue :find_inst;
-                }
             }
 
-            val_slice = itn.next() orelse continue :find_inst;
-            val = val_slice[0];
-            //print("Third value: {d}\n", .{val});
+            // Optional third digit
+            if (val != ',' and isDigit(val)) {
+                mult_one = mult_one * 10 + (val - '0');
+                val_slice = itn.next() orelse continue :find_inst;
+                val = val_slice[0];
+            }
+
+            // Comma
             if (val == ',') {
                 val_slice = itn.next() orelse continue :find_inst;
                 val = val_slice[0];
-                //print("Fourth value: {d}\n", .{val});
             }
 
-            if (val > 47 and val < 58) {
-                mult_two = val - 48;
-                //print("Found digit: {d}\n", .{mult_one});
-            } else {
-                continue :find_inst;
-            }
+            // First Digit
+            if (!isDigit(val)) continue :find_inst;
+            mult_two = val - '0';
 
+            // Optional second digit
             val_slice = itn.next() orelse continue :find_inst;
             val = val_slice[0];
-            //print("Fifth value: {d}\n", .{val});
-            if (val > 47 and val < 58) {
-                mult_two = mult_two * 10 + val - 48;
-                //print("Modified digit: {d}\n", .{mult_one});
-            }
-
-            if (val != ')') {
+            if (isDigit(val)) {
+                mult_two = mult_two * 10 + (val - '0');
                 val_slice = itn.next() orelse continue :find_inst;
                 val = val_slice[0];
-                //print("Fifth value: {d}\n", .{val});
-                if (val > 47 and val < 58) {
-                    mult_two = mult_two * 10 + val - 48;
-                    //print("Modified digit: {d}\n", .{mult_one});
-                }
             }
 
-            if (val != ')') {
+            // Optional third digit
+            if (val != ')' and isDigit(val)) {
+                mult_two = mult_two * 10 + (val - '0');
                 val_slice = itn.next() orelse continue :find_inst;
                 val = val_slice[0];
-                //print("Sixth value: {d}\n", .{val});
             }
 
+            // Calculate result if we found a complete multiplication
             if (val == ')') {
                 program_result += mult_one * mult_two;
-                //print("Mutliplying {d} by {d} = {d}\n", .{ mult_one, mult_two, program_result });
             }
         }
     }
+
     print("Program result: {d}\n", .{program_result});
 }
