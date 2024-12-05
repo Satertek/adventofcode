@@ -61,6 +61,29 @@ fn countCrossword(crossword: [PUZZLE_SIZE][PUZZLE_SIZE]u8) u32 {
     return count;
 }
 
+fn countXofMas(crossword: [PUZZLE_SIZE][PUZZLE_SIZE]u8) u32 {
+    var count: u32 = 0;
+    for (1..PUZZLE_SIZE - 1) |i| {
+        for (1..PUZZLE_SIZE - 1) |j| {
+
+            // If top left to bottom right is MAS or SAM
+            if ((crossword[i][j] == 'A') and
+                (((crossword[i - 1][j - 1] == 'M') and (crossword[i + 1][j + 1] == 'S')) or
+                ((crossword[i - 1][j - 1] == 'S') and (crossword[i + 1][j + 1] == 'M'))))
+            {
+                // If top right to bottom left is MAS or SAM
+                if ((crossword[i][j] == 'A') and
+                    (((crossword[i + 1][j - 1] == 'M') and (crossword[i - 1][j + 1] == 'S')) or
+                    ((crossword[i + 1][j - 1] == 'S') and (crossword[i - 1][j + 1] == 'M'))))
+                {
+                    count += 1;
+                }
+            }
+        }
+    }
+    return count;
+}
+
 pub fn main() !void {
 
     // Split input by newlines and copy each row to crossword
@@ -72,9 +95,9 @@ pub fn main() !void {
         crossword[j] = row_values;
     }
 
-    var total_count: u32 = 0;
+    const xmas_count = countCrossword(crossword);
+    const x_of_mas_count = countXofMas(crossword);
 
-    total_count += countCrossword(crossword);
-
-    print("Count: {}\n", .{total_count});
+    print("XMAS Count: {}\n", .{xmas_count});
+    print("X of MAS Count: {}\n", .{x_of_mas_count});
 }
