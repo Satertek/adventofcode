@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug this day",
+            "type": "lldb-dap",
+            "request": "launch",
+            "program": "${workspaceFolder}/zig-out/bin/${fileBasenameNoExtension}",
+            "args": [],
+            "internalConsoleOptions": "openOnSessionStart",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build",
+            "initCommands": [
+                "settings set target.process.stop-on-sharedlibrary-events false"
+            ],
+        },
+        {
+            "name": "Build all days",
+            "type": "lldb-dap",
+            "request": "launch",
+            "program": "zig build run_all",
+            "args": [],
+            "internalConsoleOptions": "openOnSessionStart",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build_all",
+            "initCommands": [
+                "settings set target.process.stop-on-sharedlibrary-events false"
+            ],
+        }
+    ]
+}

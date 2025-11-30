@@ -1,0 +1,28 @@
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "zig build install_${fileBasenameNoExtension}",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$zig"],
+            "detail": "Build the day using Zig"
+        },
+        {
+            "label": "build_all",
+            "type": "shell",
+            "command": "zig build install_all",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$zig"],
+            "detail": "Build all days using Zig"
+        }
+    ]
+}
